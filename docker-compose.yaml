@@ -1,0 +1,57 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: admin
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: noemail@noemail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+
+  nginx:
+    container_name: nginx
+    depends_on:
+      - api
+      - client
+    restart: always
+    build: ./nginx
+    ports:
+      - "3050:80"
+
+  api:
+    container_name: api
+    build: ./backend
+    environment:
+      - PGUSER=admin
+      - PGHOST=postgres
+      - PGDATABASE=mydb
+      - PGPASSWORD=root
+      - PGPORT=5432
+
+  client:
+    container_name: client
+    stdin_open: true
+    build: ./frontend
+
+
+volumes:
+  pgdata:
+  pgadmin:
