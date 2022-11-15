@@ -26,6 +26,31 @@ services:
     ports:
       - "5050:80"
 
+  strapi:
+    container_name: strapi
+    restart: unless-stopped
+    build:
+      context: ./cms
+      dockerfile: Dockerfile
+
+    depends_on:
+      - postgres
+    ports:
+      - "1337:1337"
+    environment:
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=mydb
+      - DATABASE_USERNAME=admin
+      - DATABASE_PASSWORD=root
+      - DATABASE_SSL=false
+    volumes:
+      - /cms/scrapi/public/uploads:/opt/app/public/uploads
+      - /cms/scrapi/public:/opt/app/public
+    networks:
+      - app-network
+
   nginx:
     container_name: nginx
     depends_on:
@@ -70,3 +95,7 @@ services:
 volumes:
   pgdata:
   pgadmin:
+
+networks:
+  app-network:
+    driver: bridge
