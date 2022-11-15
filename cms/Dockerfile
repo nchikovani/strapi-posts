@@ -6,6 +6,7 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/
 COPY ./package.json ./package-lock.json ./
 ENV PATH /opt/node_modules/.bin:$PATH
+RUN npm install -g npm@9.1.1
 RUN npm install
 RUN npm i sharp
 WORKDIR /opt/app
