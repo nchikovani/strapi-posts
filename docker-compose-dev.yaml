@@ -13,6 +13,8 @@ services:
     restart: unless-stopped
     ports:
       - "5432:5432"
+    networks:
+      - global-network
 
   pgadmin:
     container_name: pgadmin
@@ -25,14 +27,15 @@ services:
     restart: unless-stopped
     ports:
       - "5050:80"
+    networks:
+      - global-network
 
   strapi:
     container_name: strapi
     restart: unless-stopped
     build:
       context: ./cms
-      dockerfile: Dockerfile
-
+      dockerfile: Dockerfile.dev
     depends_on:
       - postgres
     ports:
@@ -46,10 +49,13 @@ services:
       - DATABASE_PASSWORD=root
       - DATABASE_SSL=false
     volumes:
-      - /cms/scrapi/public/uploads:/opt/app/public/uploads
-      - /cms/scrapi/public:/opt/app/public
+      - ./cms/config:/opt/app/config
+      - ./cms/src:/opt/app/src
+      - ./cms/package.json:/opt/package.json
+      - ./cms/.env:/opt/app/.env
+      - ./cms/public/uploads:/opt/app/public/uploads
     networks:
-      - app-network
+      - global-network
 
   nginx:
     container_name: nginx
@@ -60,6 +66,8 @@ services:
     build: ./nginx
     ports:
       - "3050:80"
+    networks:
+      - global-network
 
   api:
     container_name: api
@@ -76,6 +84,8 @@ services:
       - PGPASSWORD=root
       - PGPORT=5432
       - CHOKIDAR_USEPOLLING=true
+    networks:
+      - global-network
 
   client:
     container_name: client
@@ -90,12 +100,14 @@ services:
       - ./frontend:/app
     ports:
       - "3000:3000"
-
+    networks:
+      - global-network
 
 volumes:
   pgdata:
   pgadmin:
 
 networks:
-  app-network:
+  global-network:
+    name: Global
     driver: bridge

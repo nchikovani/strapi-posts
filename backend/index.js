@@ -16,7 +16,7 @@ const pgClient = new Pool({
 });
 
 app.get("/posts/values", (req, res) => {
-  pgClient.query("SELECT * FROM post").then(posts => {
+  pgClient.query("SELECT * FROM posts").then(posts => {
     console.log('posts', {data: posts.rows});
 
     res.json({data: posts.rows});
