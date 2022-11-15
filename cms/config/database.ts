@@ -9,5 +9,8 @@ export default ({ env }) => ({
       password: env('DATABASE_PASSWORD', 'root'),
       ssl: env.bool('DATABASE_SSL', false),
     },
+    settings: {
+      forceMigration: false
+    }
   },
 });
