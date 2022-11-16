@@ -1,12 +1,10 @@
-FROM node:16-alpine
-# Installing libvips-dev for sharp Compatibility
-RUN apk update && apk add  build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+FROM strapi/base
+LABEL com.centurylinklabs.watchtower.enable="false"
 WORKDIR /opt/app
-COPY package*.json ./
-RUN npm install
+COPY ./package*.json ./
+RUN npm ci
 COPY ./ .
+ENV NODE_ENV production
 RUN npm run build
 EXPOSE 1337
-CMD ["npm", "run", "develop"]
+CMD ["npm", "run", "start"]
