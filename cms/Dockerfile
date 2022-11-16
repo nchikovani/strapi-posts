@@ -1,7 +1,8 @@
 FROM strapi/base
 LABEL com.centurylinklabs.watchtower.enable="false"
 WORKDIR /opt/app
-COPY ./package*.json ./
+COPY ./package.json ./
+RUN npm cache clean --force
 RUN npm ci
 COPY ./ .
 ENV NODE_ENV production
