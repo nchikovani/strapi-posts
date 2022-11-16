@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM --platform=linux/amd64 node:16-alpine
 # Installing libvips-dev for sharp Compatibility
 RUN apk update && apk add  build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
 ARG NODE_ENV=production
