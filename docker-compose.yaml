@@ -63,6 +63,10 @@ services:
       - INIT_ADMIN_EMAIL=${STRAPI_ADMIN_EMAIL}
       - INIT_ADMIN_PASSWORD=${STRAPI_ADMIN_PASSWORD}
     volumes:
+      - ./cms/config:/opt/app/config
+      - ./cms/src:/opt/app/src
+      - ./cms/package.json:/opt/package.json
+      - ./cms/.env:/opt/app/.env
       - ./cms/public/uploads:/opt/app/public/uploads
     networks:
       - global-network
