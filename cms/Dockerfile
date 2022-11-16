@@ -8,7 +8,7 @@ COPY ./package.json ./package-lock.json ./
 ENV PATH /opt/node_modules/.bin:$PATH
 RUN npm install -g npm@9.1.1
 RUN npm install
-RUN npm i sharp
+RUN npm i sharp terser-webpack-plugin @strapi/design-system
 WORKDIR /opt/app
 COPY ./ .
 RUN npm run build
