@@ -9,6 +9,15 @@ ENV PATH /opt/node_modules/.bin:$PATH
 RUN npm install
 WORKDIR /opt/app
 COPY ./ .
+ARG HOST
+ARG PORT
+ARG APP_PORT
+ARG APP_KEYS
+ARG APP_HOST
+ENV HOST=${HOST}
+ENV PORT=${PORT}
+ENV APP_PORT=${APP_PORT}
+ENV APP_KEYS=${APP_KEYS}
+ENV APP_HOST=${APP_HOST}
 RUN npm run build
-EXPOSE 1337
 CMD ["npm", "run", "start"]

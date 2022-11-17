@@ -38,10 +38,13 @@ services:
       dockerfile: Dockerfile.dev
       args:
         NODE_ENV: development
+        HOST: ${STRAPI_HOST}
+        PORT: ${STRAPI_PORT}
+        APP_PORT: ${APP_PORT}
+        APP_KEYS: ${STRAPI_APP_KEYS}
+        APP_HOST: ${APP_HOST}
     depends_on:
       - postgres
-    ports:
-      - "1337:1337"
     environment:
       - DATABASE_CLIENT=postgres
       - DATABASE_HOST=postgres
@@ -50,9 +53,6 @@ services:
       - DATABASE_USERNAME=${POSTGRES_USER}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
       - DATABASE_SSL=false
-      - HOST=${STRAPI_HOST}
-      - PORT=${STRAPI_PORT}
-      - APP_KEYS=${STRAPI_APP_KEYS}
       - API_TOKEN_SALT=${STRAPI_API_TOKEN_SALT}
       - ADMIN_JWT_SECRET=${STRAPI_ADMIN_JWT_SECRET}
       - JWT_SECRET=${STRAPI_JWT_SECRET}
@@ -79,7 +79,7 @@ services:
     restart: always
     build: ./nginx
     ports:
-      - "3050:80"
+      - "${APP_PORT}:80"
     networks:
       - global-network
 

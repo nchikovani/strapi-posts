@@ -1,7 +1,7 @@
 export default ({ env }) => ({
-  host: env('HOST', '0.0.0.0'),
-  port: env.int('PORT', 1337),
-  url: "http://localhost:3050/strapi",
+  host: env('HOST'),
+  port: env.int('PORT'),
+  url: `http://${env('APP_HOST')}:${env('APP_PORT')}/strapi`,
   app: {
     keys: env.array('APP_KEYS'),
   },
