@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
     build:
       context: ./cms
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
       args:
         NODE_ENV: development
     depends_on:
@@ -74,30 +74,12 @@ services:
   nginx:
     container_name: nginx
     depends_on:
-      - api
+      - strapi
       - client
     restart: always
     build: ./nginx
     ports:
       - "3050:80"
-    networks:
-      - global-network
-
-  api:
-    container_name: api
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/node_modules
-      - ./backend:/app
-    environment:
-      - PGUSER=${POSTGRES_USER}
-      - PGHOST=postgres
-      - PGDATABASE=${POSTGRES_DB}
-      - PGPASSWORD=${POSTGRES_PASSWORD}
-      - PGPORT=${POSTGRES_PORT}
-      - CHOKIDAR_USEPOLLING=true
     networks:
       - global-network
 

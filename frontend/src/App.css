@@ -1,13 +1,26 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  background: #E7EBF0;
 }
 
-.post {
-  display: flex;
+#root {
+  width: 100%;
 }
-.post__id {
-  width: 50px;
+
+.App {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1 {
+  display: block;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 60px;
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }

@@ -40,8 +40,6 @@ services:
         NODE_ENV: production
     depends_on:
       - postgres
-    ports:
-      - "1337:1337"
     environment:
       - DATABASE_CLIENT=postgres
       - DATABASE_HOST=postgres
@@ -74,7 +72,7 @@ services:
   nginx:
     container_name: nginx
     depends_on:
-      - api
+      - strapi
       - client
     restart: always
     build: ./nginx
@@ -83,17 +81,17 @@ services:
     networks:
       - global-network
 
-  api:
-    container_name: api
-    build: ./backend
-    environment:
-      - PGUSER=${POSTGRES_USER}
-      - PGHOST=postgres
-      - PGDATABASE=${POSTGRES_DB}
-      - PGPASSWORD=${POSTGRES_PASSWORD}
-      - PGPORT=${POSTGRES_PORT}
-    networks:
-      - global-network
+#  api:
+#    container_name: api
+#    build: ./backend
+#    environment:
+#      - PGUSER=${POSTGRES_USER}
+#      - PGHOST=postgres
+#      - PGDATABASE=${POSTGRES_DB}
+#      - PGPASSWORD=${POSTGRES_PASSWORD}
+#      - PGPORT=${POSTGRES_PORT}
+#    networks:
+#      - global-network
 
   client:
     container_name: client
