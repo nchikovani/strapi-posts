@@ -1,6 +1,5 @@
 import MainContainer from "../../components/MainContainer";
 import {GetServerSideProps} from "next";
-import {Typography} from "@mui/material";
 import styles from '../../styles/post.module.scss'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -17,7 +16,7 @@ const Post = ({post}: {post: {id: string, attributes: any}}) => {
       <h1>
         {post.attributes.title}
       </h1>
-      {<ReactMarkdown children={post.attributes.content} remarkPlugins={[remarkGfm]} />}
+      {<ReactMarkdown remarkPlugins={[remarkGfm]} >{post.attributes.content}</ReactMarkdown>}
     </div>
   </MainContainer>
 };
