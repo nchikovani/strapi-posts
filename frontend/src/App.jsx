@@ -24,31 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>strapi-posts</h1>
-      <div className="posts">
-        {posts.map(post => (
-          <>
-            <Card key={post.id} sx={{ width: 392 }} style={{marginBottom: "20px"}}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={`/strapi${post.attributes.image.data.attributes.url}`}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {post.attributes.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {post.attributes.description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </>
-        ))}
-      </div>
+
     </div>
   )
 }

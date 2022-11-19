@@ -87,13 +87,15 @@ services:
     container_name: client
     stdin_open: true
     build:
-      context: ./frontend
+      context: ./client
       dockerfile: Dockerfile.dev
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - API_IP=${API_IP}
     volumes:
+      - ./client:/app
       - /app/node_modules
-      - ./frontend:/app
+      - /app/.next
     ports:
       - "3000:3000"
     networks:

@@ -1,0 +1,8 @@
+FROM node:14.14.0-alpine as builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --silent
+COPY . ./
+EXPOSE 3000
+RUN npm run build
+CMD ["npm", "run", "start"]
