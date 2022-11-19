@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import Head from "next/head";
+import styles from "../styles/Home.module.scss";
 
-const MainContainer: React.FunctionComponent<{}> = () => {
+interface MainContainer {
+  title: string;
+  description: string;
+}
+
+const MainContainer: React.FunctionComponent<PropsWithChildren<MainContainer>> = ({children, description, title}) => {
 
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
-        <title>Strapi-posts</title>
-        <meta name="description" content="Strapi-posts description" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {children}

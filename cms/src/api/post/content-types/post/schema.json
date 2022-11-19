@@ -23,8 +23,8 @@
         "images"
       ]
     },
-    "description": {
-      "type": "text"
+    "content": {
+      "type": "richtext"
     }
   }
 }

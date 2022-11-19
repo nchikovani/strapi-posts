@@ -87,6 +87,8 @@ services:
     container_name: client
     stdin_open: true
     build: ./client
+    environment:
+      - API_IP=${API_IP}
     networks:
       - global-network
 

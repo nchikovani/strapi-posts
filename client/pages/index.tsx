@@ -1,46 +1,53 @@
-import Head from 'next/head'
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
 import Typography from '@mui/material/Typography';
 import styles from '../styles/Home.module.scss'
+import MainContainer from "../components/MainContainer";
+import {useRouter} from "next/router";
+import {GetServerSideProps} from "next";
 
 const Home = ({posts}: {posts: {id: string, attributes: any}[]}) => {
+  const router = useRouter();
+
+  const handlePostClick = (id: string) => {
+    router.push(`/post/${id}`)
+  }
+
   return (
-    <div className={styles.container}>
+    <MainContainer title="Strapi-posts" description="Strapi-posts description">
       <h1 className={styles.title}>strapi-posts</h1>
       <div className={styles.posts}>
         {posts.map((post) => (
-          <Card key={post.id} sx={{ width: 392 }} style={{marginBottom: "20px"}}>
+          <Card key={post.id} sx={{ width: 392, height: 272 }} style={{marginBottom: "20px"}} onClick={() => handlePostClick(post.id)}>
             <CardActionArea>
               <CardMedia
                 component="img"
                 height="140"
                 image={`/strapi${post.attributes.image.data.attributes.url}`}
-                alt="green iguana"
+                alt={post.attributes.title}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {post.attributes.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {post.attributes.description}
+                <Typography variant="body2" color="text.secondary" className={styles.content_text}>
+                  {post.attributes.content}
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         ))}
       </div>
-    </div>
+    </MainContainer>
   )
 }
 
 export default Home;
 
-// @ts-ignore
-export const getServerSideProps = async (context) => {
-  const res = await fetch(`http://172.27.0.1:3050/strapi/api/posts?populate[0]=image`);
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await fetch(`http://${process.env.API_IP}:3050/strapi/api/posts?populate[0]=image`);
   const posts = await res.json();
   return {
     props: {posts: posts.data}

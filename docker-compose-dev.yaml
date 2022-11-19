@@ -101,6 +101,7 @@ services:
     networks:
       - global-network
 
+
 volumes:
   pgdata:
   pgadmin:
