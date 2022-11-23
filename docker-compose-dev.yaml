@@ -91,7 +91,8 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - API_IP=${API_IP}
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
     volumes:
       - ./client:/app
       - /app/node_modules

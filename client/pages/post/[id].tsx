@@ -1,5 +1,6 @@
+import React from 'react';
 import MainContainer from "../../components/MainContainer";
-import {GetServerSideProps} from "next";
+import {GetStaticPaths, GetStaticProps} from "next";
 import styles from '../../styles/post.module.scss'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -23,11 +24,24 @@ const Post = ({post}: {post: {id: string, attributes: any}}) => {
 
 export default Post;
 
-export const getServerSideProps: GetServerSideProps = async ({params}) => {
-  // @ts-ignore
-  const res = await fetch(`http://${process.env.API_IP}:3050/strapi/api/posts/${params.id}?populate[0]=image`);
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(`http://${process.env.APP_HOST}:${process.env.APP_PORT}/strapi/api/posts`);
   const post = await res.json();
+  const paths = post.data.map((item: any) => ({params: {id: String(item.id)}}))
+
   return {
-    props: {post: post.data}
+    paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({params}) => {
+  // @ts-ignore
+  const res = await fetch(`http://${process.env.APP_HOST}:${process.env.APP_PORT}/strapi/api/posts/${params.id}?populate[0]=image`);
+  const post = await res.json();
+
+  return {
+    props: {post: post.data},
+    revalidate: 60
   }
 }

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import styles from '../styles/Home.module.scss'
 import MainContainer from "../components/MainContainer";
 import {useRouter} from "next/router";
-import {GetServerSideProps} from "next";
+import {GetStaticProps} from "next";
 
 const Home = ({posts}: {posts: {id: string, attributes: any}[]}) => {
   const router = useRouter();
@@ -46,10 +46,12 @@ const Home = ({posts}: {posts: {id: string, attributes: any}[]}) => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await fetch(`http://${process.env.API_IP}:3050/strapi/api/posts?populate[0]=image`);
+export const getStaticProps: GetStaticProps = async (context) => {
+  const res = await fetch(`http://${process.env.APP_HOST}:${process.env.APP_PORT}/strapi/api/posts?populate[0]=image`);
   const posts = await res.json();
+
   return {
-    props: {posts: posts.data}
+    props: {posts: posts.data},
+    revalidate: 60,
   }
 }

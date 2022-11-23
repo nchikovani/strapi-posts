@@ -9,6 +9,16 @@ const nextConfig = {
     }
     return config
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: process.env.APP_HOST,
+        port: process.env.APP_PORT,
+        pathname: '/strapi/**',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig
