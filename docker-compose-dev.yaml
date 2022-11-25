@@ -91,8 +91,7 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - APP_HOST=${APP_HOST}
-      - APP_PORT=${APP_PORT}
+      - STRAPI_PORT=${STRAPI_PORT}
     volumes:
       - ./client:/app
       - /app/node_modules

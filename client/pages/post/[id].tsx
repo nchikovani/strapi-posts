@@ -25,23 +25,37 @@ const Post = ({post}: {post: {id: string, attributes: any}}) => {
 export default Post;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`http://${process.env.APP_HOST}:${process.env.APP_PORT}/strapi/api/posts`);
-  const post = await res.json();
-  const paths = post.data.map((item: any) => ({params: {id: String(item.id)}}))
+  try {
+    const res = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts`);
+    const post = await res.json();
+    const paths = post.data.map((item: any) => ({params: {id: String(item.id)}}))
 
-  return {
-    paths,
-    fallback: false
+    return {
+      paths,
+      fallback: false
+    }
+  } catch (e) {
+    return {
+      paths: [],
+      fallback: false,
+    }
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-  // @ts-ignore
-  const res = await fetch(`http://${process.env.APP_HOST}:${process.env.APP_PORT}/strapi/api/posts/${params.id}?populate[0]=image`);
-  const post = await res.json();
+  try {
+    // @ts-ignore
+    const res = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts/${params.id}?populate[0]=image`);
+    const post = await res.json();
 
-  return {
-    props: {post: post.data},
-    revalidate: 60
+    return {
+      props: {post: post.data},
+      revalidate: 60
+    }
+  } catch (e) {
+    return {
+      props: {post: null},
+      revalidate: 60
+    }
   }
 }

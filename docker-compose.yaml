@@ -86,9 +86,15 @@ services:
   client:
     container_name: client
     stdin_open: true
-    build: ./client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        STRAPI_PORT: ${STRAPI_PORT}
     environment:
-      - API_IP=${API_IP}
+      - STRAPI_PORT=${STRAPI_PORT}
+    depends_on:
+      - strapi
     networks:
       - global-network
 

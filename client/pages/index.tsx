@@ -47,11 +47,18 @@ const Home = ({posts}: {posts: {id: string, attributes: any}[]}) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch(`http://${process.env.APP_HOST}:${process.env.APP_PORT}/strapi/api/posts?populate[0]=image`);
-  const posts = await res.json();
+  try {
+    const res = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts?populate[0]=image`);
+    const posts = await res.json();
 
-  return {
-    props: {posts: posts.data},
-    revalidate: 60,
+    return {
+      props: {posts: posts.data},
+      revalidate: 60,
+    }
+  } catch (e) {
+    return {
+      props: {posts: []},
+      revalidate: 60,
+    }
   }
 }

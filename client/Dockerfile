@@ -4,5 +4,7 @@ COPY package*.json ./
 RUN npm install --silent
 COPY . ./
 EXPOSE 3000
+ARG STRAPI_PORT
+ENV STRAPI_PORT=${STRAPI_PORT}
 RUN npm run build
 CMD ["npm", "run", "start"]
