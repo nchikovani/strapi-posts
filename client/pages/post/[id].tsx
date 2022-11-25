@@ -4,6 +4,7 @@ import {GetStaticPaths, GetStaticProps} from "next";
 import styles from '../../styles/post.module.scss'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import {useRouter} from "next/router";
 
 const Post = ({post}: {post: {id: string, attributes: any}}) => {
 
@@ -32,12 +33,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
       paths,
-      fallback: false
+      fallback: 'blocking',
     }
   } catch (e) {
     return {
       paths: [],
-      fallback: false,
+      fallback: 'blocking',
     }
   }
 }
@@ -50,12 +51,12 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
 
     return {
       props: {post: post.data},
-      revalidate: 60
+      revalidate: 120
     }
   } catch (e) {
     return {
-      props: {post: null},
-      revalidate: 60
+      props: {post: {}},
+      revalidate: 120
     }
   }
 }
