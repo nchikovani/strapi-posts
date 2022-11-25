@@ -17,3 +17,9 @@ stop-prod:
 clear:
 	docker container prune
 	docker image prune -a
+
+
+create-dump:
+	docker exec -t postgres pg_dumpall -c -U admin > postgres-dump.sql
+restore-dump:
+	cat postgres-dump.sql | docker exec -i postgres psql -U admin
