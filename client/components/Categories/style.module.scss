@@ -1,0 +1,30 @@
+@import "styles/colors.modules";
+
+.categories {
+  padding: 20px;
+  border: 1px solid map_get($common, 'gray-13');
+}
+
+.title {
+  padding-bottom: 36px;
+}
+
+.category_link {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.category {
+  &:first-child {
+    .category_link {
+      padding-top: 0;
+    }
+  }
+  &:last-child {
+    .category_link {
+      padding-bottom: 0;
+    }
+  }
+}
+

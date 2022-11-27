@@ -1,5 +1,5 @@
 import React from 'react';
-import MainContainer from "../../components/MainContainer";
+import MainContainer from "../../components/MainContainer/index";
 import {GetStaticPaths, GetStaticProps} from "next";
 import styles from '../../styles/post.module.scss'
 import ReactMarkdown from 'react-markdown'

@@ -1,0 +1,38 @@
+@import "styles/colors.modules";
+
+.container {
+  width: 1164px;
+  margin: 0 auto;
+  min-height: calc(100vh - 233px);
+  padding: 48px 0 84px;
+  display: flex;
+}
+
+.main_wrapper {
+  flex-grow: 1;
+  padding-right: 24px;
+}
+
+.nav_wrapper {
+  width: 261px;
+}
+
+
+.header, .footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: map_get($common, "gray-15");
+}
+
+.header {
+  height: 150px;
+}
+
+.footer {
+  height: 83px;
+  &__text {
+    font-size: 32px;
+    line-height: 57px;
+  }
+}

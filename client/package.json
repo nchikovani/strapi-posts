@@ -11,6 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@fontsource/montserrat": "^4.5.13",
+    "@fontsource/sriracha": "^4.5.9",
     "@mui/material": "^5.10.14",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
