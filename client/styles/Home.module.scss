@@ -1,13 +1,10 @@
-.posts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
+@import "colors.module";
 
-.content_text {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
+//.content_text {
+//  display: -webkit-box;
+//  -webkit-line-clamp: 3;
+//  -webkit-box-orient: vertical;
+//  overflow: hidden;
+//  text-overflow: ellipsis;
+//}

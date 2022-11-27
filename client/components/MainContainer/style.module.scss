@@ -1,9 +1,12 @@
-@import "styles/colors.modules";
+@import "../../styles/colors.module";
+
+$headerHeight: 150px;
+$footerHeight: 83px;
 
 .container {
   width: 1164px;
   margin: 0 auto;
-  min-height: calc(100vh - 233px);
+  min-height: calc(100vh - #{$headerHeight} - #{$footerHeight});
   padding: 48px 0 84px;
   display: flex;
 }
@@ -15,6 +18,7 @@
 
 .nav_wrapper {
   width: 261px;
+  min-width: 261px;
 }
 
 
@@ -26,11 +30,11 @@
 }
 
 .header {
-  height: 150px;
+  height: $headerHeight;
 }
 
 .footer {
-  height: 83px;
+  height: $footerHeight;
   &__text {
     font-size: 32px;
     line-height: 57px;

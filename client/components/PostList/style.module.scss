@@ -1,0 +1,40 @@
+@import "../../styles/colors.module";
+
+.posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.post {
+  padding: 36px 0;
+  display: flex;
+  &__img {
+    width: 356px;
+    min-width: 356px;
+    height: 208px;
+    background: map_get($common, 'gray-13');
+    margin-right: 24px;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  &__category {
+    margin-bottom: 21px;
+  }
+  &__title {
+    margin-bottom: 12px;
+  }
+  &__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__date {
+    align-self: end;
+    margin-top: auto;
+  }
+}

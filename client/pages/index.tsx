@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -7,6 +8,7 @@ import styles from '../styles/Home.module.scss'
 import MainContainer from "../components/MainContainer/index";
 import {useRouter} from "next/router";
 import {GetStaticProps} from "next";
+import PostList from "../components/PostList";
 
 const Home = ({posts}: {posts: {id: string, attributes: any}[]}) => {
   const router = useRouter();
@@ -17,6 +19,9 @@ const Home = ({posts}: {posts: {id: string, attributes: any}[]}) => {
 
   return (
     <MainContainer title="Strapi-posts" description="Strapi-posts description">
+      <div>
+        <PostList/>
+      </div>
       {/*<div className={styles.posts}>*/}
       {/*  {posts.map((post) => (*/}
       {/*    <Card key={post.id} sx={{ width: 392, height: 272 }} style={{marginBottom: "20px"}} onClick={() => handlePostClick(post.id)}>*/}
