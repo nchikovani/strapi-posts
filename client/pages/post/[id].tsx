@@ -2,23 +2,21 @@ import React from 'react';
 import MainContainer from "../../components/MainContainer/index";
 import {GetStaticPaths, GetStaticProps} from "next";
 import styles from '../../styles/post.module.scss'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import {useRouter} from "next/router";
-import {Typography} from "@mui/material";
-import Colors from "../../styles/colors.module.scss";
 import PostContent from "../../components/PostContent";
+import CommentList from "../../components/CommentList";
+import CommentForm from "../../components/CommentForm";
 
 const Post = ({post}: {post: {id: string, attributes: any}}) => {
 
   return <MainContainer title={post.attributes.title} description={post.attributes.title}>
-    <div className={styles.post}>
+    <div className={styles.post_wrapper}>
       <PostContent/>
     </div>
     <hr className={styles.hr}/>
-    <div className={styles.comments}>
-
+    <div className={styles.comments_wrapper}>
+      <CommentList/>
     </div>
+    <CommentForm/>
   </MainContainer>
 };
 
