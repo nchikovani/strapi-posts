@@ -3,6 +3,8 @@
 .categories {
   padding: 20px;
   border: 1px solid map_get($common, 'gray-13');
+  position: sticky;
+  top: 36px;
 }
 
 .title {

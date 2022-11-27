@@ -8,6 +8,10 @@
 .post {
   padding: 36px 0;
   display: flex;
+  cursor: pointer;
+  &:hover {
+    background: map_get($common, 'gray-16');
+  }
   &__img {
     width: 356px;
     min-width: 356px;
@@ -37,4 +41,10 @@
     align-self: end;
     margin-top: auto;
   }
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
 }

@@ -15,6 +15,7 @@ $common: (
   'gray-13': #ddd,
   'gray-14': #eee,
   'gray-15': #F7F7F7,
+  'gray-16': #FaFaFa,
 );
 
 :export {
@@ -33,4 +34,5 @@ $common: (
   gray13: map_get($common, 'gray-13');
   gray14: map_get($common, 'gray-14');
   gray15: map_get($common, 'gray-15');
+  gray16: map_get($common, 'gray-16');
 }

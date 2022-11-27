@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -9,19 +9,14 @@ import MainContainer from "../components/MainContainer/index";
 import {useRouter} from "next/router";
 import {GetStaticProps} from "next";
 import PostList from "../components/PostList";
+import {LoadingButton} from "@mui/lab";
 
 const Home = ({posts}: {posts: {id: string, attributes: any}[]}) => {
-  const router = useRouter();
-
-  const handlePostClick = (id: string) => {
-    router.push(`/post/${id}`)
-  }
-
   return (
     <MainContainer title="Strapi-posts" description="Strapi-posts description">
-      <div>
+      <>
         <PostList/>
-      </div>
+      </>
       {/*<div className={styles.posts}>*/}
       {/*  {posts.map((post) => (*/}
       {/*    <Card key={post.id} sx={{ width: 392, height: 272 }} style={{marginBottom: "20px"}} onClick={() => handlePostClick(post.id)}>*/}

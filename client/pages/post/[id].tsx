@@ -5,20 +5,19 @@ import styles from '../../styles/post.module.scss'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import {useRouter} from "next/router";
+import {Typography} from "@mui/material";
+import Colors from "../../styles/colors.module.scss";
+import PostContent from "../../components/PostContent";
 
 const Post = ({post}: {post: {id: string, attributes: any}}) => {
 
   return <MainContainer title={post.attributes.title} description={post.attributes.title}>
-    <div className={styles.container}>
-      <img
-        className={styles.img}
-        src={`/strapi${post.attributes.image.data.attributes.url}`}
-        alt={post.attributes.title}
-      />
-      <h1>
-        {post.attributes.title}
-      </h1>
-      {<ReactMarkdown remarkPlugins={[remarkGfm]} >{post.attributes.content}</ReactMarkdown>}
+    <div className={styles.post}>
+      <PostContent/>
+    </div>
+    <hr className={styles.hr}/>
+    <div className={styles.comments}>
+
     </div>
   </MainContainer>
 };
@@ -32,7 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = post.data.map((item: any) => ({params: {id: String(item.id)}}))
 
     return {
-      paths,
+      paths: [{params: {id: '4'}}],
       fallback: 'blocking',
     }
   } catch (e) {
