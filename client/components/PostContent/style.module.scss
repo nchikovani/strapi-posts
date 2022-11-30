@@ -12,9 +12,9 @@
 
 .img {
   width: 100%;
-  height: 364px;
   margin-bottom: 36px;
   background: map_get($common, 'gray-13');
+  object-fit: cover;
 }
 
 .markdown {

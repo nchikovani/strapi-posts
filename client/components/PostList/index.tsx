@@ -4,37 +4,36 @@ import Typography from "@mui/material/Typography";
 import Colors from '../../styles/colors.module.scss';
 import {LoadingButton} from "@mui/lab";
 import {useRouter} from "next/router";
+import Image from 'next/image'
+import {post} from "../../types/strapiTypes";
 
-
-const description = "Lorem ipsum dolor sit amet consectetur. At tempor amet urna netus enim sed at augue. Lectus dui eget ornare massa lobortis semper vestibulum lacus. Libero ac turpis lectus quam."
-const date = "17 декабря 2022"
-const PostList = () => {
+const PostList: React.FC<{posts: post[]}> = ({posts}) => {
   const [isLoading, setIsLoading] = useState(false);
-  const myPosts = [
-    {title: "Название первого поста", description: description, date, category: "Категория 1"},
-    {title: "Название поста 2", description: description, date, category: "Категория 1"},
-    {title: "Название поста 12", description: description, date, category: "Категория 2"},
-    {title: "Длинное Название поста", description: description, date, category: "Категория 1"},
-  ];
   const router = useRouter();
 
-  const handlePostClick = (id: string) => {
-    router.push(`/post/${id}`)
+  const handlePostClick = (segment_name: string) => {
+    router.push(`/post/${segment_name}`)
   }
 
   return (
     <>
       <div className={styles.posts}>
-        {myPosts.map((post) => (
-          <div key={post.title}>
+        {posts.map((post) => (
+          <div key={post.id}>
             <hr/>
-            <div className={styles.post} onClick={() => handlePostClick('4')}>
-              <div className={styles.post__img}/>
+            <div className={styles.post} onClick={() => handlePostClick(post.attributes.segment_name)}>
+              <Image
+                className={styles.post__img}
+                src={`http://strapi:1337${post.attributes.image.data.attributes.formats.small.url}`}
+                width={356}
+                height={178}
+                alt={post.attributes.title}
+              />
               <div className={styles.post__content}>
-                <Typography className={styles.post__category} variant="caption">{post.category}</Typography>
-                <Typography className={styles.post__title} variant="h3">{post.title}</Typography>
-                <Typography className={styles.post__description} variant="body1">{post.description}</Typography>
-                <Typography className={styles.post__date} variant="subtitle1" color={Colors.gray8}>{post.date}</Typography>
+                <Typography className={styles.post__category} variant="caption">{post.attributes.category.data.attributes.name}</Typography>
+                <Typography className={styles.post__title} variant="h3">{post.attributes.title}</Typography>
+                <Typography className={styles.post__description} variant="body1">{post.attributes.description}</Typography>
+                <Typography className={styles.post__date} variant="subtitle1" color={Colors.gray8}>{post.attributes.publishedAt}</Typography>
               </div>
             </div>
           </div>
@@ -54,7 +53,6 @@ const PostList = () => {
         >Загрузить ещё</LoadingButton>
       </div>
     </>
-
   )
 };
 

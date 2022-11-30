@@ -1,14 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Typography} from '@mui/material'
 import styles from './style.module.scss';
 import Chips from "../ui-kit/Chips";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {GetStaticPaths, GetStaticProps} from "next";
+import {category} from "../../types/strapiTypes";
 
-const Categories = () => {
-  const categories = [{name: 'Путешествия', count: 7, url: 'category_1'}, {name: 'Искусство', count: 18, url: 'category_1'}, {name: 'Наука', count: 11, url: 'category_1'}, {name: 'Мемы', count: 3, url: 'category_1'},];
-  const router = useRouter();
+const Categories = ({categories}: {categories: category[]}) => {
 
   return (
     <div className={styles.categories}>
@@ -16,13 +15,13 @@ const Categories = () => {
       <ul>
         {
           categories.map((category) => (
-            <li key={category.name} className={styles.category}>
+            <li key={category.id} className={styles.category}>
               <Link
-                href={`/category/${category.url}`}
+                href={`/category/${category.attributes.segment_name}`}
                 className={styles.category_link}
               >
-                <Typography variant="body1">{category.name}</Typography>
-                <Chips>{category.count}</Chips>
+                <Typography variant="body1">{category.attributes.name}</Typography>
+                <Chips>10</Chips>
               </Link>
             </li>
           ))

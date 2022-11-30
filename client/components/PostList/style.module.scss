@@ -15,9 +15,9 @@
   &__img {
     width: 356px;
     min-width: 356px;
-    height: 208px;
     background: map_get($common, 'gray-13');
     margin-right: 24px;
+    object-fit: cover;
   }
   &__content {
     display: flex;
@@ -32,7 +32,7 @@
   }
   &__description {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

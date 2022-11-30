@@ -10,35 +10,15 @@ import {useRouter} from "next/router";
 import {GetStaticProps} from "next";
 import PostList from "../components/PostList";
 import {LoadingButton} from "@mui/lab";
+import {category, post} from "../types/strapiTypes";
 
-const Home = ({posts}: {posts: {id: string, attributes: any}[]}) => {
+const Home: React.FC<{posts: post[], categories: category[]}> = ({posts, categories}) => {
+  console.log(categories);
   return (
-    <MainContainer title="Strapi-posts" description="Strapi-posts description">
+    <MainContainer title="Strapi-posts" description="Strapi-posts description" categories={categories}>
       <>
-        <PostList/>
+        <PostList posts={posts}/>
       </>
-      {/*<div className={styles.posts}>*/}
-      {/*  {posts.map((post) => (*/}
-      {/*    <Card key={post.id} sx={{ width: 392, height: 272 }} style={{marginBottom: "20px"}} onClick={() => handlePostClick(post.id)}>*/}
-      {/*      <CardActionArea>*/}
-      {/*        <CardMedia*/}
-      {/*          component="img"*/}
-      {/*          height="140"*/}
-      {/*          image={`/strapi${post.attributes.image.data.attributes.url}`}*/}
-      {/*          alt={post.attributes.title}*/}
-      {/*        />*/}
-      {/*        <CardContent>*/}
-      {/*          <Typography gutterBottom variant="h5" component="div">*/}
-      {/*            {post.attributes.title}*/}
-      {/*          </Typography>*/}
-      {/*          <Typography variant="body2" color="text.secondary" className={styles.content_text}>*/}
-      {/*            {post.attributes.content}*/}
-      {/*          </Typography>*/}
-      {/*        </CardContent>*/}
-      {/*      </CardActionArea>*/}
-      {/*    </Card>*/}
-      {/*  ))}*/}
-      {/*</div>*/}
     </MainContainer>
   )
 }
@@ -47,16 +27,18 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   try {
-    const res = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts?populate[0]=image`);
-    const posts = await res.json();
+    const postRes = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts?populate[category]=category&populate[image]=image`);
+    const posts = await postRes.json();
+    const categoriesRes = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/categories`);
+    const categories = await categoriesRes.json();
 
     return {
-      props: {posts: posts.data},
+      props: {posts: posts.data, categories: categories.data},
       revalidate: 60,
     }
   } catch (e) {
     return {
-      props: {posts: []},
+      props: {posts: [], categories: []},
       revalidate: 60,
     }
   }

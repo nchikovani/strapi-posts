@@ -4,13 +4,15 @@ import styles from "./style.module.scss";
 import {Typography} from '@mui/material'
 import Categories from "../Categories";
 import Link from "next/link";
+import {category} from "../../types/strapiTypes";
 
 interface Index {
   title: string;
   description: string;
+  categories: category[]
 }
 
-const MainContainer: React.FunctionComponent<PropsWithChildren<Index>> = ({children, description, title}) => {
+const MainContainer: React.FunctionComponent<PropsWithChildren<Index>> = ({children, description, title, categories}) => {
 
   return (
     <>
@@ -29,7 +31,7 @@ const MainContainer: React.FunctionComponent<PropsWithChildren<Index>> = ({child
       <div className={styles.container}>
         <div className={styles.main_wrapper}>{children}</div>
         <nav className={styles.nav_wrapper}>
-          <Categories/>
+          <Categories categories={categories}/>
         </nav>
       </div>
       <footer className={styles.footer}>
