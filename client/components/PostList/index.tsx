@@ -7,13 +7,27 @@ import {useRouter} from "next/router";
 import Image from 'next/image'
 import {post} from "../../types/strapiTypes";
 
-const PostList: React.FC<{posts: post[]}> = ({posts}) => {
+interface PostListProps {
+  posts: post[];
+  postsTotal: number;
+  loadMorePosts: () => Promise<void>;
+}
+
+const PostList: React.FC<PostListProps> = ({posts, postsTotal, loadMorePosts}) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handlePostClick = (segment_name: string) => {
     router.push(`/post/${segment_name}`)
+  };
+
+  const loadingButtonHandler = async () => {
+    setIsLoading(true);
+    await loadMorePosts();
+    setIsLoading(false);
   }
+
+  const loadingButtonIsShown = posts.length < postsTotal;
 
   return (
     <>
@@ -39,19 +53,18 @@ const PostList: React.FC<{posts: post[]}> = ({posts}) => {
           </div>
         ))}
       </div>
-      <div className={styles.button_wrapper}>
-        <LoadingButton
-          variant="outlined"
-          loading={isLoading}
-          loadingPosition="end"
-          onClick={() => {
-            setIsLoading(true);
-            setTimeout(() => {
-              setIsLoading(false)
-            }, 1000)
-          }}
-        >Загрузить ещё</LoadingButton>
-      </div>
+      {
+        loadingButtonIsShown && (
+          <div className={styles.button_wrapper}>
+            <LoadingButton
+              variant="outlined"
+              loading={isLoading}
+              loadingPosition="end"
+              onClick={loadingButtonHandler}
+            >Загрузить ещё</LoadingButton>
+          </div>
+        )
+      }
     </>
   )
 };

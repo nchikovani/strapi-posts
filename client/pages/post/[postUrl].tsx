@@ -6,8 +6,19 @@ import PostContent from "../../components/PostContent";
 import CommentList from "../../components/CommentList";
 import CommentForm from "../../components/CommentForm";
 import {category, post} from "../../types/strapiTypes";
+import withCategories from "../../libs/withCategories";
+import {ParsedUrlQuery} from "querystring";
 
-const Post: React.FC<{post: post, categories: category[]}> = ({post, categories}) => {
+interface Params extends ParsedUrlQuery {
+  postUrl: string;
+}
+
+interface PostProps {
+  post: post;
+  categories: category[];
+}
+
+const Post: React.FC<PostProps> = ({post, categories}) => {
 
   return <MainContainer title={post.attributes.title} description={post.attributes.title} categories={categories}>
     <div className={styles.post_wrapper}>
@@ -27,7 +38,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   try {
     const res = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts`);
     const post = await res.json();
-    const paths = post.data.map((item: any) => ({params: {segmentName: item.attributes.segment_name}}))
+    const paths = post.data.map((item: any) => ({params: {postUrl: item.attributes.segment_name}}))
 
     return {
       paths: paths,
@@ -41,13 +52,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getStaticProps: GetStaticProps = withCategories(async ({params}) => {
   try {
-    // @ts-ignore
-    const res = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts?populate[0]=image&filters[segment_name][$eq]=${params.segmentName}`);
+    const { postUrl } = params as Params;
+    const res = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts?populate[0]=image&filters[segment_name][$eq]=${postUrl}`);
     const post = await res.json();
-    const categoriesRes = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/categories`);
-    const categories = await categoriesRes.json();
 
     if (!post.data[0]) {
       return {
@@ -56,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     }
 
     return {
-      props: {post: post.data[0], categories: categories.data},
+      props: {post: post.data[0]},
       revalidate: 120
     }
   } catch (e) {
@@ -65,4 +74,4 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       revalidate: 120
     }
   }
-}
+});

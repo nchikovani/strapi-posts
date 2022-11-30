@@ -6,15 +6,24 @@ import MainContainer from "../../components/MainContainer";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {Typography} from "@mui/material";
 import {category, post} from "../../types/strapiTypes";
+import withCategories from "../../libs/withCategories";
+import {ParsedUrlQuery} from "querystring";
 
-const Category: React.FC<{posts: post[], categories: category[], categoryName: string}> = ({posts, categories, categoryName}) => {
-  console.log(posts);
+interface CategoryProps {
+  posts: post[];
+  categories: category[];
+  categoryName: string;
+}
+
+interface Params extends ParsedUrlQuery {
+  categoryUrl: string;
+}
+
+const Category: React.FC<CategoryProps> = ({posts, categories, categoryName}) => {
   return (
     <MainContainer title={`Strapi-posts ${categoryName}`} description="Strapi-posts description" categories={categories}>
-      <>
-        <Typography variant="h2" className={styles.title}>{categoryName}</Typography>
-        <PostList posts={posts}/>
-      </>
+      <Typography variant="h2" className={styles.title}>{categoryName}</Typography>
+      <PostList posts={posts}/>
     </MainContainer>
   );
 };
@@ -25,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   try {
     const categoriesRes = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/categories`);
     const categories = await categoriesRes.json();
-    const paths = categories.data.map((item: any) => ({params: {name: item.attributes.segment_name}}))
+    const paths = categories.data.map((item: any) => ({params: {categoryUrl: item.attributes.segment_name}}))
     return {
       paths,
       fallback: 'blocking',
@@ -38,11 +47,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getStaticProps: GetStaticProps<CategoryProps> = withCategories(async ({params}) => {
   try {
-    const categoriesRes = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/categories`);
-    const categories = await categoriesRes.json();
-    const targetCategory = categories.data.find((category) => category.attributes.segment_name === params.name);
+    const { categoryUrl } = params as Params;
+    const categoryRes = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/categories?filters[segment_name][$eq]=${categoryUrl}`);
+    const category = await categoryRes.json();
+    const targetCategory = category.data[0];
+
     if (!targetCategory) {
       return {
         notFound: true,
@@ -51,13 +62,13 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     const postRes = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/posts?populate[category]=category&populate[image]=image&filters[category][id][$eq]=${targetCategory.id}`);
     const posts = await postRes.json();
     return {
-      props: {posts: posts.data, categories: categories.data, categoryName: targetCategory.attributes.name},
+      props: {posts: posts.data, categoryName: targetCategory.attributes.name},
       revalidate: 120
     }
   } catch (e) {
     return {
-      props: {posts: []},
+      props: {posts: [], categoryName: ''},
       revalidate: 120
     }
   }
-}
+});

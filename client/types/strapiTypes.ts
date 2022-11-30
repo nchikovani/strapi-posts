@@ -1,5 +1,13 @@
 export type strapiType<T> = {
-  data: T
+  data: T,
+  meta: {
+    pagination: {
+      page: number,
+      pageCount: number,
+      pageSize: number,
+      total: number
+    }
+  }
 };
 
 export type post = {

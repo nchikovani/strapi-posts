@@ -12,7 +12,9 @@ const PostContent: React.FC<{post: post}> = ({post}) => {
   return (
     <>
       <Typography variant="h2" className={styles.title}>{post.attributes.title}</Typography>
-      <Typography variant="subtitle1" className={styles.date} color={Colors.gray8}>{post.attributes.publishedAt}</Typography>
+      <div className={styles.date_wrapper}>
+        <Typography variant="subtitle1" color={Colors.gray8}>{post.attributes.publishedAt}</Typography>
+      </div>
       <Image
         className={styles.img}
         src={`http://strapi:1337${post.attributes.image.data.attributes.url}`}
