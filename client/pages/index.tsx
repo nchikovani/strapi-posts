@@ -13,17 +13,10 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({defaultPosts, categories, postsTotal}) => {
-  const [posts, setPosts] = useState<post[]>(defaultPosts);
-
-  const loadMorePosts = async () => {
-    const newPosts = await getPosts(posts.length);
-    setPosts((state) => [...state, ...newPosts.data]);
-  };
-
 
   return (
     <MainContainer title="Strapi-posts" description="Strapi-posts description" categories={categories}>
-      <PostList posts={posts} postsTotal={postsTotal} loadMorePosts={loadMorePosts}/>
+      <PostList defaultPosts={defaultPosts} postsTotal={postsTotal}/>
     </MainContainer>
   )
 }

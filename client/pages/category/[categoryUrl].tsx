@@ -23,21 +23,11 @@ interface Params extends ParsedUrlQuery {
 }
 
 const Category: React.FC<CategoryProps> = ({defaultPosts, categories, categoryName, postsTotal}) => {
-  const [posts, setPosts] = useState<post[]>(defaultPosts);
-
-  useEffect(() => {
-    setPosts(defaultPosts);
-  }, [defaultPosts])
-
-  const loadMorePosts = async () => {
-    const newPosts = await getPosts(posts.length);
-    setPosts((state) => [...state, ...newPosts.data]);
-  };
 
   return (
     <MainContainer title={`Strapi-posts ${categoryName}`} description="Strapi-posts description" categories={categories}>
       <Typography variant="h2" className={styles.title}>{categoryName}</Typography>
-      <PostList posts={posts} postsTotal={postsTotal} loadMorePosts={loadMorePosts}/>
+      <PostList defaultPosts={defaultPosts} postsTotal={postsTotal}/>
     </MainContainer>
   );
 };

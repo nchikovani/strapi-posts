@@ -10,4 +10,6 @@ const getEndpoint = () => {
   return `http://${publicRuntimeConfig.appHost}:${publicRuntimeConfig.appPort}/strapi`;
 };
 
-export default getEndpoint();
+export const ENDPOINT =  getEndpoint();
+
+export const PAGINATION_LIMIT = 2;

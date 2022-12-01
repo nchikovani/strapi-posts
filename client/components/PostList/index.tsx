@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "./style.module.scss";
 import Typography from "@mui/material/Typography";
 import Colors from '../../styles/colors.module.scss';
@@ -6,15 +6,16 @@ import {LoadingButton} from "@mui/lab";
 import {useRouter} from "next/router";
 import Image from 'next/image'
 import {post} from "../../types/strapiTypes";
+import getPosts from "../../libs/getPosts";
 
 interface PostListProps {
-  posts: post[];
+  defaultPosts: post[];
   postsTotal: number;
-  loadMorePosts: () => Promise<void>;
 }
 
-const PostList: React.FC<PostListProps> = ({posts, postsTotal, loadMorePosts}) => {
+const PostList: React.FC<PostListProps> = ({defaultPosts, postsTotal}) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState<post[]>(defaultPosts);
   const router = useRouter();
 
   const handlePostClick = (segment_name: string) => {
@@ -23,11 +24,16 @@ const PostList: React.FC<PostListProps> = ({posts, postsTotal, loadMorePosts}) =
 
   const loadingButtonHandler = async () => {
     setIsLoading(true);
-    await loadMorePosts();
+    const newPosts = await getPosts(posts.length);
+    setPosts((state) => [...state, ...newPosts.data]);
     setIsLoading(false);
   }
 
   const loadingButtonIsShown = posts.length < postsTotal;
+
+  useEffect(() => {
+    setPosts(defaultPosts);
+  }, [defaultPosts]);
 
   return (
     <>
