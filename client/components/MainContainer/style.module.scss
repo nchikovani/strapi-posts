@@ -2,12 +2,13 @@
 
 $headerHeight: 150px;
 $footerHeight: 83px;
+$containerWidth: 1164px;
 
 .container {
-  width: 1164px;
-  margin: 0 auto;
+  width: $containerWidth;
   min-height: calc(100vh - #{$headerHeight} - #{$footerHeight});
-  padding: 48px 0 84px;
+  margin: 0 auto;
+  padding: 48px 24px 84px;
   display: flex;
 }
 
@@ -23,6 +24,7 @@ $footerHeight: 83px;
 
 
 .header, .footer {
+  min-width: $containerWidth;
   display: flex;
   align-items: center;
   justify-content: center;
