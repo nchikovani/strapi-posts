@@ -91,8 +91,12 @@ services:
       dockerfile: Dockerfile
       args:
         STRAPI_PORT: ${STRAPI_PORT}
+        APP_HOST: ${APP_HOST}
+        APP_PORT: ${APP_PORT}
     environment:
       - STRAPI_PORT=${STRAPI_PORT}
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
     depends_on:
       - strapi
     networks:

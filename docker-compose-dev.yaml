@@ -92,6 +92,8 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - STRAPI_PORT=${STRAPI_PORT}
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
     volumes:
       - ./client:/app
       - /app/node_modules

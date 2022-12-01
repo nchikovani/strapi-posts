@@ -7,16 +7,15 @@ import withCategories from "../libs/withCategories";
 import getPosts from "../libs/getPosts";
 
 interface HomeProps {
-  defaultPosts: strapiType<post[]>;
+  defaultPosts: post[];
+  postsTotal: number;
   categories: category[];
 }
 
-const Home: React.FC<HomeProps> = ({defaultPosts, categories}) => {
-  const [posts, setPosts] = useState<post[]>(defaultPosts.data);
-  const postsTotal = defaultPosts.meta.pagination.total;
+const Home: React.FC<HomeProps> = ({defaultPosts, categories, postsTotal}) => {
+  const [posts, setPosts] = useState<post[]>(defaultPosts);
 
   const loadMorePosts = async () => {
-    console.log('load');
     const newPosts = await getPosts(posts.length);
     setPosts((state) => [...state, ...newPosts.data]);
   };
@@ -36,12 +35,12 @@ export const getStaticProps: GetStaticProps = withCategories(async (context) => 
     const posts = await getPosts(0)
 
     return {
-      props: {defaultPosts: posts},
+      props: {defaultPosts: posts.data, postsTotal: posts.meta.pagination.total},
       revalidate: 60,
     }
   } catch (e) {
     return {
-      props: {defaultPosts: []},
+      props: {defaultPosts: [], postsTotal: 0},
       revalidate: 60,
     }
   }
