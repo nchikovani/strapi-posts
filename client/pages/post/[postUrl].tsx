@@ -8,7 +8,7 @@ import CommentForm from "../../components/CommentForm";
 import {category, post} from "../../types/strapiTypes";
 import withCategories from "../../libs/withCategories";
 import {ParsedUrlQuery} from "querystring";
-import endpoint from "../../libs/endpoint";
+import {ENDPOINT} from "../../constants";
 
 interface Params extends ParsedUrlQuery {
   postUrl: string;
@@ -37,7 +37,7 @@ export default Post;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const res = await fetch(`${endpoint}/api/posts`);
+    const res = await fetch(`${ENDPOINT}/api/posts`);
     const post = await res.json();
     const paths = post.data.map((item: any) => ({params: {postUrl: item.attributes.segment_name}}))
 
@@ -56,7 +56,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = withCategories(async ({params}) => {
   try {
     const { postUrl } = params as Params;
-    const res = await fetch(`${endpoint}/api/posts?populate[0]=image&filters[segment_name][$eq]=${postUrl}`);
+    const res = await fetch(`${ENDPOINT}/api/posts?populate[0]=image&filters[segment_name][$eq]=${postUrl}`);
     const post = await res.json();
 
     if (!post.data[0]) {

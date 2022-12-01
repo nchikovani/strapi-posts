@@ -1,4 +1,5 @@
 import {GetStaticProps, GetStaticPropsContext, GetStaticPropsResult} from "next";
+import {ENDPOINT} from "../constants";
 
 const withCategories = (callback: GetStaticProps) => {
 
@@ -7,7 +8,7 @@ const withCategories = (callback: GetStaticProps) => {
     // @ts-ignore
     const callbackProps = callbackRes.props || {};
     try {
-      const categoriesRes = await fetch(`http://strapi:${process.env.STRAPI_PORT}/api/categories`);
+      const categoriesRes = await fetch(`${ENDPOINT}/api/categories`);
       const categories = await categoriesRes.json();
 
       return {

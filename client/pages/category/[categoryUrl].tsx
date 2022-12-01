@@ -9,7 +9,7 @@ import {category, post, strapiType} from "../../types/strapiTypes";
 import withCategories from "../../libs/withCategories";
 import {ParsedUrlQuery} from "querystring";
 import getPosts from "../../libs/getPosts";
-import endpoint from "../../libs/endpoint";
+import {ENDPOINT} from "../../constants";
 
 interface CategoryProps {
   defaultPosts: post[];
@@ -46,7 +46,7 @@ export default Category;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const categoriesRes = await fetch(`${endpoint}/api/categories`);
+    const categoriesRes = await fetch(`${ENDPOINT}/api/categories`);
     const categories = await categoriesRes.json();
     const paths = categories.data.map((item: any) => ({params: {categoryUrl: item.attributes.segment_name}}))
     return {
@@ -64,7 +64,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<CategoryProps> = withCategories(async ({params}) => {
   try {
     const { categoryUrl } = params as Params;
-    const categoryRes = await fetch(`${endpoint}/api/categories?filters[segment_name][$eq]=${categoryUrl}`);
+    const categoryRes = await fetch(`${ENDPOINT}/api/categories?filters[segment_name][$eq]=${categoryUrl}`);
     const category = await categoryRes.json();
     const targetCategory = category.data[0];
 
