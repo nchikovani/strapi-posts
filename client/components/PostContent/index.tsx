@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {post} from "../../types/strapiTypes";
 import Image from "next/image";
+import moment from "moment";
 
 const PostContent: React.FC<{post: post}> = ({post}) => {
 
@@ -13,7 +14,7 @@ const PostContent: React.FC<{post: post}> = ({post}) => {
     <>
       <Typography variant="h2" className={styles.title}>{post.attributes.title}</Typography>
       <div className={styles.date_wrapper}>
-        <Typography variant="subtitle1" color={Colors.gray8}>{post.attributes.publishedAt}</Typography>
+        <Typography variant="subtitle1" color={Colors.gray8}>{moment(post.attributes.publishedAt).format('DD MMMM YYYY')}</Typography>
       </div>
       <Image
         className={styles.img}
