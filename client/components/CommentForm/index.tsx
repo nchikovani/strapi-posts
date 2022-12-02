@@ -2,18 +2,19 @@ import React, {useState} from 'react';
 import {TextField, Typography} from "@mui/material";
 import styles from './style.module.scss';
 import {LoadingButton} from "@mui/lab";
+import {AddComment} from "../../hooks/useComments";
 
-const CommentForm = () => {
+const CommentForm = ({addComment}: {addComment: AddComment}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [name, setName] = useState('');
-  const [comment, setComment] = useState('');
+  const [content, setContent] = useState('');
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setIsLoading(true);
-    setTimeout(() => {
-      console.log(name, comment);
-      setIsLoading(false);
-    }, 1000);
+    await addComment({name, content})
+    setIsLoading(false);
+    setName('')
+    setContent('')
   }
 
   return (
@@ -31,8 +32,8 @@ const CommentForm = () => {
         fullWidth
         multiline
         rows={6}
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         className={styles.comment}
       />
       <div className={styles.button_wrapper}>

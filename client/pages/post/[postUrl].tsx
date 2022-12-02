@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import MainContainer from "../../components/MainContainer/index";
 import {GetStaticPaths, GetStaticProps} from "next";
 import styles from '../../styles/post.module.scss'
@@ -9,6 +9,8 @@ import {category, post} from "../../types/strapiTypes";
 import withCategories from "../../libs/withCategories";
 import {ParsedUrlQuery} from "querystring";
 import {ENDPOINT} from "../../constants";
+import getComments from "../../libs/getComments";
+import useComments from "../../hooks/useComments";
 
 interface Params extends ParsedUrlQuery {
   postUrl: string;
@@ -20,6 +22,7 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({post, categories}) => {
+  const [comments, isFetching, addComment] = useComments(post.id);
 
   return <MainContainer title={post.attributes.title} description={post.attributes.title} categories={categories}>
     <div className={styles.post_wrapper}>
@@ -27,9 +30,9 @@ const Post: React.FC<PostProps> = ({post, categories}) => {
     </div>
     <hr className={styles.hr}/>
     <div className={styles.comments_wrapper}>
-      <CommentList/>
+      <CommentList comments={comments}/>
     </div>
-    <CommentForm/>
+    <CommentForm addComment={addComment}/>
   </MainContainer>
 };
 

@@ -54,3 +54,14 @@ export type category = {
     updatedAt: string;
   }
 }
+
+export type comment = {
+  id: number;
+  attributes: {
+    name: string;
+    content: string;
+    createdAt: string;
+    publishedAt: string;
+    updatedAt: string;
+  }
+}
