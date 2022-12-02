@@ -19,7 +19,7 @@ const Categories = ({categories}: {categories: Category[]}) => {
                 className={styles.category_link}
               >
                 <Typography variant="body1">{category.attributes.name}</Typography>
-                <Chips>10</Chips>
+                <Chips>{category.attributes.count}</Chips>
               </Link>
             </li>
           ))

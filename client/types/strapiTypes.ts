@@ -52,6 +52,7 @@ export type Category = {
     createdAt: string;
     publishedAt: string;
     updatedAt: string;
+    count: number;
   }
 }
 
