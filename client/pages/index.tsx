@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import MainContainer from "../components/MainContainer/index";
 import {GetStaticProps} from "next";
 import PostList from "../components/PostList";
-import {category, post, strapiType} from "../types/strapiTypes";
+import {Category, Post} from "../types/strapiTypes";
 import withCategories from "../libs/withCategories";
 import getPosts from "../libs/getPosts";
 
 interface HomeProps {
-  defaultPosts: post[];
+  defaultPosts: Post[];
   postsTotal: number;
-  categories: category[];
+  categories: Category[];
 }
 
 const Home: React.FC<HomeProps> = ({defaultPosts, categories, postsTotal}) => {

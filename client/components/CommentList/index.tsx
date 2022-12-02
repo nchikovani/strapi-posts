@@ -3,9 +3,9 @@ import {Typography} from "@mui/material";
 import styles from './style.module.scss';
 import Colors from '../../styles/colors.module.scss';
 import moment from "moment";
-import {comment} from "../../types/strapiTypes";
+import {Comment} from "../../types/strapiTypes";
 
-const CommentList = ({comments}: {comments: comment[]}) => {
+const CommentList = ({comments}: {comments: Comment[]}) => {
 
   return (
     <>

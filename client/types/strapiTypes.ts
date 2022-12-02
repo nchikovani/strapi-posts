@@ -1,4 +1,4 @@
-export type strapiType<T> = {
+export type StrapiType<T> = {
   data: T,
   meta: {
     pagination: {
@@ -10,24 +10,24 @@ export type strapiType<T> = {
   }
 };
 
-export type post = {
+export type Post = {
   id: number;
   attributes: {
     content: string;
     title: string;
     description: string;
     segment_name: string;
-    image: strapiType<image>;
-    category: strapiType<category>;
+    image: StrapiType<Image>;
+    category: StrapiType<Category>;
     createdAt: string;
     publishedAt: string;
     updatedAt: string;
   }
 };
 
-export type strapiPost = strapiType<post>;
+export type StrapiPost = StrapiType<Post>;
 
-export type image = {
+export type Image = {
   id: number;
   attributes: {
     name: string;
@@ -44,7 +44,7 @@ export type image = {
   }
 }
 
-export type category = {
+export type Category = {
   id: number;
   attributes: {
     name: string;
@@ -55,7 +55,7 @@ export type category = {
   }
 }
 
-export type comment = {
+export type Comment = {
   id: number;
   attributes: {
     name: string;

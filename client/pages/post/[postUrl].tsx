@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import MainContainer from "../../components/MainContainer/index";
 import {GetStaticPaths, GetStaticProps} from "next";
 import styles from '../../styles/post.module.scss'
 import PostContent from "../../components/PostContent";
 import CommentList from "../../components/CommentList";
 import CommentForm from "../../components/CommentForm";
-import {category, post} from "../../types/strapiTypes";
+import {Category, Post} from "../../types/strapiTypes";
 import withCategories from "../../libs/withCategories";
 import {ParsedUrlQuery} from "querystring";
 import {ENDPOINT} from "../../constants";
-import getComments from "../../libs/getComments";
 import useComments from "../../hooks/useComments";
 
 interface Params extends ParsedUrlQuery {
@@ -17,8 +16,8 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface PostProps {
-  post: post;
-  categories: category[];
+  post: Post;
+  categories: Category[];
 }
 
 const Post: React.FC<PostProps> = ({post, categories}) => {

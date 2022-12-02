@@ -2,18 +2,18 @@ import React, {useEffect, useState} from 'react';
 import styles from "./style.module.scss";
 import {LoadingButton} from "@mui/lab";
 import {useRouter} from "next/router";
-import {post} from "../../types/strapiTypes";
+import {Post} from "../../types/strapiTypes";
 import getPosts from "../../libs/getPosts";
-import Post from "./Post";
+import PostCard from "./Post";
 
 interface PostListProps {
-  defaultPosts: post[];
+  defaultPosts: Post[];
   postsTotal: number;
 }
 
 const PostList: React.FC<PostListProps> = ({defaultPosts, postsTotal}) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [posts, setPosts] = useState<post[]>(defaultPosts);
+  const [posts, setPosts] = useState<Post[]>(defaultPosts);
   const router = useRouter();
 
   const handlePostClick = (segment_name: string) => {
@@ -37,7 +37,7 @@ const PostList: React.FC<PostListProps> = ({defaultPosts, postsTotal}) => {
     <>
       <div className={styles.posts}>
         {posts.map((post) => (
-          <Post post={post} handlePostClick={handlePostClick} key={post.id}/>
+          <PostCard post={post} handlePostClick={handlePostClick} key={post.id}/>
         ))}
       </div>
       {

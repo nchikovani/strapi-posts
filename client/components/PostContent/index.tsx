@@ -4,11 +4,11 @@ import styles from "./style.module.scss";
 import Colors from "../../styles/colors.module.scss";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import {post} from "../../types/strapiTypes";
+import {Post} from "../../types/strapiTypes";
 import Image from "next/image";
 import moment from "moment";
 
-const PostContent: React.FC<{post: post}> = ({post}) => {
+const PostContent: React.FC<{post: Post}> = ({post}) => {
 
   return (
     <>

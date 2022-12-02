@@ -3,11 +3,9 @@ import {Typography} from '@mui/material'
 import styles from './style.module.scss';
 import Chips from "../ui-kit/Chips";
 import Link from "next/link";
-import {useRouter} from "next/router";
-import {GetStaticPaths, GetStaticProps} from "next";
-import {category} from "../../types/strapiTypes";
+import {Category} from "../../types/strapiTypes";
 
-const Categories = ({categories}: {categories: category[]}) => {
+const Categories = ({categories}: {categories: Category[]}) => {
 
   return (
     <div className={styles.categories}>

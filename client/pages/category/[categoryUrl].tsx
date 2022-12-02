@@ -1,20 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import PostList from "../../components/PostList";
 import styles from "../../styles/category.module.scss";
-import {LoadingButton} from "@mui/lab";
 import MainContainer from "../../components/MainContainer";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {Typography} from "@mui/material";
-import {category, post, strapiType} from "../../types/strapiTypes";
+import {Category, Post} from "../../types/strapiTypes";
 import withCategories from "../../libs/withCategories";
 import {ParsedUrlQuery} from "querystring";
 import getPosts from "../../libs/getPosts";
 import {ENDPOINT} from "../../constants";
 
 interface CategoryProps {
-  defaultPosts: post[];
+  defaultPosts: Post[];
   postsTotal: number;
-  categories: category[];
+  categories: Category[];
   categoryName: string;
 }
 

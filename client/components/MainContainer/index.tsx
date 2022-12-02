@@ -4,15 +4,15 @@ import styles from "./style.module.scss";
 import {Typography} from '@mui/material'
 import Categories from "../Categories";
 import Link from "next/link";
-import {category} from "../../types/strapiTypes";
+import {Category} from "../../types/strapiTypes";
 
-interface Index {
+interface MainContainerProps {
   title: string;
   description: string;
-  categories: category[]
+  categories: Category[]
 }
 
-const MainContainer: React.FunctionComponent<PropsWithChildren<Index>> = ({children, description, title, categories}) => {
+const MainContainer: React.FunctionComponent<PropsWithChildren<MainContainerProps>> = ({children, description, title, categories}) => {
 
   return (
     <>

@@ -3,15 +3,15 @@ import styles from "../PostList/style.module.scss";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import Colors from "../../styles/colors.module.scss";
-import {post} from "../../types/strapiTypes";
+import {Post} from "../../types/strapiTypes";
 import moment from "moment";
 
 interface PostProps {
-  post: post;
+  post: Post;
   handlePostClick: (url: string) => void;
 }
 
-const Post: React.FC<PostProps> = ({post, handlePostClick}) => {
+const PostCard: React.FC<PostProps> = ({post, handlePostClick}) => {
   return (
     <div>
       <hr/>
@@ -34,4 +34,4 @@ const Post: React.FC<PostProps> = ({post, handlePostClick}) => {
   )
 };
 
-export default Post;
+export default PostCard;
