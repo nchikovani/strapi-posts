@@ -29,7 +29,7 @@ const Post: React.FC<PostProps> = ({post, categories}) => {
     </div>
     <hr className={styles.hr}/>
     <div className={styles.comments_wrapper}>
-      <CommentList comments={comments}/>
+      <CommentList comments={comments} isFetching={isFetching}/>
     </div>
     <CommentForm addComment={addComment}/>
   </MainContainer>
