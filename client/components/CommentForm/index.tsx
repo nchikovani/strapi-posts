@@ -18,7 +18,7 @@ const CommentForm = ({addComment}: {addComment: AddComment}) => {
   }
 
   return (
-    <>
+    <div  className={styles.comment_form}>
       <Typography variant="h3" className={styles.title}>Оставьте комментарий</Typography>
       <TextField
         placeholder="Ваше имя"
@@ -44,7 +44,7 @@ const CommentForm = ({addComment}: {addComment: AddComment}) => {
           onClick={onSubmit}
         >Отправить</LoadingButton>
       </div>
-    </>
+    </div>
   );
 };
 

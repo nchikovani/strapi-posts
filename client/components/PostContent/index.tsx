@@ -11,7 +11,7 @@ import moment from "moment";
 const PostContent: React.FC<{post: Post}> = ({post}) => {
 
   return (
-    <>
+    <div className={styles.post_content}>
       <Typography variant="h2" className={styles.title}>{post.attributes.title}</Typography>
       <div className={styles.date_wrapper}>
         <Typography variant="subtitle1" color={Colors.gray8}>{moment(post.attributes.publishedAt).format('DD MMMM YYYY')}</Typography>
@@ -30,7 +30,7 @@ const PostContent: React.FC<{post: Post}> = ({post}) => {
           </ReactMarkdown>
         </div>
       }
-    </>
+    </div>
   );
 };
 

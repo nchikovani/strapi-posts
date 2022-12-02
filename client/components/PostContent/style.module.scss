@@ -1,23 +1,25 @@
 @import 'styles/colors.module';
 
-.title {
-  text-align: center;
-  margin-bottom: 4px;
-}
+.post_content {
+  .title {
+    text-align: center;
+    margin-bottom: 4px;
+  }
 
-.date_wrapper {
-  text-align: center;
-  margin-bottom: 24px;
-}
+  .date_wrapper {
+    text-align: center;
+    margin-bottom: 24px;
+  }
 
-.img {
-  width: 100%;
-  margin-bottom: 36px;
-  background: map_get($common, 'gray-13');
-  object-fit: cover;
-}
+  .img {
+    width: 100%;
+    margin-bottom: 36px;
+    background: map_get($common, 'gray-13');
+    object-fit: cover;
+  }
 
-.markdown {
-  font-family: "Montserrat";
-  line-height: 24px;
+  .markdown {
+    font-family: "Montserrat";
+    line-height: 24px;
+  }
 }
