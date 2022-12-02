@@ -5,6 +5,8 @@ import {useRouter} from "next/router";
 import {Post} from "../../types/strapiTypes";
 import getPosts from "../../libs/getPosts";
 import PostCard from "./Post";
+import Typography from "@mui/material/Typography";
+import Colors from "../../styles/colors.module.scss";
 
 interface PostListProps {
   defaultPosts: Post[];
@@ -32,6 +34,14 @@ const PostList: React.FC<PostListProps> = ({defaultPosts, postsTotal}) => {
   useEffect(() => {
     setPosts(defaultPosts);
   }, [defaultPosts]);
+
+  if (posts.length === 0) {
+    return (
+      <Typography className={styles.empty_list} variant="subtitle2" component="p" color={Colors.gray6}>
+        Постов в этой категории пока нет
+      </Typography>
+    );
+  }
 
   return (
     <>

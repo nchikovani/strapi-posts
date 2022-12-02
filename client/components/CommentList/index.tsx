@@ -7,6 +7,14 @@ import {Comment} from "../../types/strapiTypes";
 
 const CommentList = ({comments}: {comments: Comment[]}) => {
 
+  if (comments.length === 0) {
+    return (
+      <Typography className={styles.empty_list} variant="subtitle2" component="p" color={Colors.gray6}>
+        Комментариев пока нет
+      </Typography>
+    );
+  }
+
   return (
     <>
       <Typography variant="h3" className={styles.title}>Комментарии</Typography>
