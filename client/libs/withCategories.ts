@@ -14,7 +14,6 @@ const withCategories = (callback: GetStaticProps) => {
       for await (const category of categories.data) {
         const postsRes = await fetch(`${ENDPOINT}/api/posts?fields[0]=title&filters[category][id][$eq]=${category.id}`);
         const post = await postsRes.json();
-        console.log(JSON.stringify(post, null, 2));
         category.attributes.count = post.meta.pagination.total;
       }
 

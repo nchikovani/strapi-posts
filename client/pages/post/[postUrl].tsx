@@ -10,6 +10,7 @@ import withCategories from "../../libs/withCategories";
 import {ParsedUrlQuery} from "querystring";
 import {ENDPOINT} from "../../constants";
 import useComments from "../../hooks/useComments";
+import getPost from "../../libs/getPost";
 
 interface Params extends ParsedUrlQuery {
   postUrl: string;
@@ -58,17 +59,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = withCategories(async ({params}) => {
   try {
     const { postUrl } = params as Params;
-    const res = await fetch(`${ENDPOINT}/api/posts?populate[0]=image&filters[segment_name][$eq]=${postUrl}`);
-    const post = await res.json();
+    const post = await getPost(postUrl);
 
-    if (!post.data[0]) {
+    if (!post) {
       return {
         notFound: true,
       }
     }
 
     return {
-      props: {post: post.data[0]},
+      props: {post},
       revalidate: 120
     }
   } catch (e) {
