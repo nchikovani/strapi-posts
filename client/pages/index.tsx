@@ -29,12 +29,12 @@ export const getStaticProps: GetStaticProps = withCategories(async (context) => 
 
     return {
       props: {defaultPosts: posts.data, postsTotal: posts.meta.pagination.total},
-      revalidate: 60,
+      revalidate: 15,
     }
   } catch (e) {
     return {
       props: {defaultPosts: [], postsTotal: 0},
-      revalidate: 60,
+      revalidate: 15,
     }
   }
 })

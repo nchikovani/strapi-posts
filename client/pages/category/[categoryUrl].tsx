@@ -63,12 +63,12 @@ export const getStaticProps: GetStaticProps<CategoryProps> = withCategories(asyn
     const posts = await getPosts(0, targetCategory.id);
     return {
       props: {defaultPosts: posts.data, postsTotal: posts.meta.pagination.total, categoryName: targetCategory.attributes.name},
-      revalidate: 120
+      revalidate: 15
     }
   } catch (e) {
     return {
       props: {defaultPosts: [], postsTotal: 0, categoryName: ''},
-      revalidate: 120
+      revalidate: 15
     }
   }
 });

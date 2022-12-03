@@ -69,12 +69,12 @@ export const getStaticProps: GetStaticProps = withCategories(async ({params}) =>
 
     return {
       props: {post},
-      revalidate: 120
+      revalidate: 60
     }
   } catch (e) {
     return {
       props: {post: {}},
-      revalidate: 120
+      revalidate: 60
     }
   }
 });

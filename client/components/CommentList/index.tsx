@@ -30,7 +30,7 @@ const CommentList = ({comments, isFetching}: {comments: Comment[], isFetching: b
             <div key={comment.id} className={styles.comment}>
               <Typography variant="subtitle2" component="p" className={styles.name}>{comment.attributes.name}</Typography>
               <Typography variant="body1" className={styles.comment_content}>{comment.attributes.content}</Typography>
-              <Typography variant="caption" color={Colors.gray8} className={styles.date}>{moment(comment.attributes.publishedAt).format('DD MMMM YYYY')}</Typography>
+              <Typography variant="caption" color={Colors.gray8} className={styles.date}>{moment(comment.attributes.publishedAt).format('DD MMMM YYYY HH:MM')}</Typography>
               <hr/>
             </div>
           ))

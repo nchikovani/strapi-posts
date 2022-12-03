@@ -18,6 +18,18 @@
 }
 
 .category {
+  &__active {
+    .category_name {
+      font-weight: 500;
+    }
+  }
+
+  &:hover {
+    .category_name {
+      font-weight: 500;
+    }
+  }
+
   &:first-child {
     .category_link {
       padding-top: 0;
