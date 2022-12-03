@@ -9,8 +9,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-#      - pgdata:/var/lib/postgresql/data
-      - ./postgres-dump.sql:/docker-entrypoint-initdb.d/postgres-dump.sql
+      - pgdata:/var/lib/postgresql/data
     restart: unless-stopped
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
@@ -105,7 +104,7 @@ services:
 
 
 volumes:
-#  pgdata:
+  pgdata:
   pgadmin:
 
 networks:
