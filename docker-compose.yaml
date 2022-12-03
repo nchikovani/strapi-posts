@@ -10,7 +10,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
 #      - pgdata:/var/lib/postgresql/data
-      - ./postgres-dump.sql:/docker-entrypoint-initdb.d
+      - ./postgres-dump.sql:/docker-entrypoint-initdb.d/postgres-dump.sql
     restart: unless-stopped
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
