@@ -22,6 +22,6 @@ clear:
 create-dump:
 	docker exec -t postgres pg_dumpall -c -U admin > postgres-dump.sql
 restore-dump:
-	docker exec -i dropdb -U admin -f mytestdb
+	docker exec -i postgres dropdb -U admin -f mytestdb
 	docker exec -i postgres createdb -U admin mytestdb
 	docker exec -i postgres /bin/bash -c "PGPASSWORD=root1 psql --username admin mytestdb" < ./postgres-dump.sql
