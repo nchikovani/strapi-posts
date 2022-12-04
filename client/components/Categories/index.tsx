@@ -9,8 +9,6 @@ import {useRouter} from "next/router"
 const Categories = ({categories}: {categories: Category[]}) => {
   const router = useRouter();
 
-  console.log(router.query.categoryUrl);
-
   return (
     <div className={styles.categories}>
       <Typography variant="h4" component="p" className={styles.title}>Категории</Typography>

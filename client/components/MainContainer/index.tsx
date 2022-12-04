@@ -1,5 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import Head from "next/head";
+import {Html} from 'next/document'
 import styles from "./style.module.scss";
 import {Typography} from '@mui/material'
 import Categories from "../Categories";
@@ -15,7 +16,7 @@ interface MainContainerProps {
 const MainContainer: React.FunctionComponent<PropsWithChildren<MainContainerProps>> = ({children, description, title, categories}) => {
 
   return (
-    <>
+    <Html lang="en">
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -41,7 +42,7 @@ const MainContainer: React.FunctionComponent<PropsWithChildren<MainContainerProp
           <Typography variant="h1" className={styles.footer__text}>StrapiPosts</Typography>
         </Link>
       </footer>
-    </>
+    </Html>
   )
 }
 

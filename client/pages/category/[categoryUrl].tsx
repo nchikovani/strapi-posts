@@ -8,7 +8,6 @@ import {Category, Post} from "../../types/strapiTypes";
 import withCategories from "../../libs/withCategories";
 import {ParsedUrlQuery} from "querystring";
 import getPosts from "../../libs/getPosts";
-import {ENDPOINT} from "../../constants";
 import getCategories from "../../libs/getCategories";
 
 interface CategoryProps {
@@ -66,6 +65,7 @@ export const getStaticProps: GetStaticProps<CategoryProps> = withCategories(asyn
       revalidate: 15
     }
   } catch (e) {
+    console.log(e);
     return {
       props: {defaultPosts: [], postsTotal: 0, categoryName: ''},
       revalidate: 15

@@ -32,6 +32,7 @@ export const getStaticProps: GetStaticProps = withCategories(async (context) => 
       revalidate: 15,
     }
   } catch (e) {
+    console.log(e);
     return {
       props: {defaultPosts: [], postsTotal: 0},
       revalidate: 15,

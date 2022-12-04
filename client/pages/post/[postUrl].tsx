@@ -49,6 +49,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       fallback: 'blocking',
     }
   } catch (e) {
+    console.log(e);
     return {
       paths: [],
       fallback: 'blocking',
@@ -72,6 +73,7 @@ export const getStaticProps: GetStaticProps = withCategories(async ({params}) =>
       revalidate: 60
     }
   } catch (e) {
+    console.log(e);
     return {
       props: {post: {}},
       revalidate: 60

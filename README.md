@@ -1,7 +1,13 @@
-Запуск в dev режиме
-- make build
-- make start
+###Запуск системы
 
-Запуск в prod режиме
-- make build-prod
-- make start-prod
+Для запуска системы необходимо неличие следующего ПО:
+- docker
+- docker-compose
+- make 
+
+Команды для сборки и запуска системы:
+
+```
+make env-prepare
+make start-prod
+make restore-dump
