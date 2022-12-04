@@ -24,7 +24,7 @@ interface PostProps {
 const Post: React.FC<PostProps> = ({post, categories}) => {
   const [comments, isFetching, addComment] = useComments(post.id);
 
-  return <MainContainer title={post.attributes.title} description={post.attributes.title} categories={categories}>
+  return <MainContainer title={post.attributes.title} description={post.attributes.description} categories={categories}>
     <div className={styles.post_wrapper}>
       <PostContent post={post}/>
     </div>

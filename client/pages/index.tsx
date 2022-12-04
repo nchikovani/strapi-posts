@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import MainContainer from "../components/MainContainer/index";
 import {GetStaticProps} from "next";
 import PostList from "../components/PostList";
@@ -15,7 +15,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({defaultPosts, categories, postsTotal}) => {
 
   return (
-    <MainContainer title="Strapi-posts" description="Strapi-posts description" categories={categories}>
+    <MainContainer title="Strapi-posts" description="Strapi-posts" categories={categories}>
       <PostList defaultPosts={defaultPosts} postsTotal={postsTotal}/>
     </MainContainer>
   )

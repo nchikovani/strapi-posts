@@ -24,7 +24,7 @@ interface Params extends ParsedUrlQuery {
 const Category: React.FC<CategoryProps> = ({defaultPosts, categories, categoryName, postsTotal}) => {
 
   return (
-    <MainContainer title={`Strapi-posts ${categoryName}`} description="Strapi-posts description" categories={categories}>
+    <MainContainer title={`Strapi-posts ${categoryName}`} description={`Strapi-posts ${categoryName}`} categories={categories}>
       <Typography variant="h2" className={styles.title}>{categoryName}</Typography>
       <PostList defaultPosts={defaultPosts} postsTotal={postsTotal}/>
     </MainContainer>
