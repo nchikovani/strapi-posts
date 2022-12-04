@@ -20,4 +20,4 @@ ENV APP_PORT=${APP_PORT}
 ENV APP_KEYS=${APP_KEYS}
 ENV APP_HOST=${APP_HOST}
 RUN npm run build
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "develop"]
